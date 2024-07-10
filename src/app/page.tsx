@@ -1,5 +1,9 @@
-import { Button } from "@/components/ui/button";
+import HomeView from "@/views/HomeView";
 
 export default function Home() {
-  return <Button>Im Button, dont click me</Button>;
+  return (
+    <main className="layout_container">
+      <HomeView />
+    </main>
+  );
 }
