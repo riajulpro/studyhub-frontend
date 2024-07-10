@@ -33,7 +33,7 @@ const Header = () => {
         </nav>
         <div className="flex gap-3 items-center">
           {token ? (
-            <div>Log Out</div>
+            <div className="text-slate-700 hover:text-green-500">Log Out</div>
           ) : (
             <Link href="/login" className="text-slate-700 hover:text-green-500">
               Login
