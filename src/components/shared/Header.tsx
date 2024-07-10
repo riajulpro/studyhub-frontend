@@ -1,19 +1,38 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/redux/hook";
+// import { useAppSelector } from "@/redux/hook";
 import { navLinks } from "@/utils/navLinks";
 
 const Header = () => {
+  const [scroll, setScroll] = useState(false);
   const location = usePathname();
   // const { user, token } = useAppSelector((state) => state.auth);
 
-  const token = "yes"
+  const token = "yes";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="py-5 lg:py-7 sticky top-0 z-50 bg-white ">
-      <div className="layout_container  flex justify-between gap-4 items-center">
+    <header
+      className={`py-5 lg:py-7 sticky top-0 z-50 bg-white transition-shadow ${
+        scroll ? "shadow-md" : ""
+      }`}
+    >
+      <div className="layout_container flex justify-between gap-4 items-center">
         <div className="flex items-center gap-2">
           {/* <LeftSidebar /> */}
           <span className="text-lg font-bold">StudyHub</span>
@@ -33,9 +52,14 @@ const Header = () => {
         </nav>
         <div className="flex gap-3 items-center">
           {token ? (
-            <div className="text-slate-700 hover:text-green-500 btn-style">Log Out</div>
+            <div className="text-slate-700 hover:text-green-500 btn-style">
+              Log Out
+            </div>
           ) : (
-            <Link href="/login" className="text-slate-700 hover:text-green-500 btn-style">
+            <Link
+              href="/login"
+              className="text-slate-700 hover:text-green-500 btn-style"
+            >
               Login
             </Link>
           )}

@@ -12,7 +12,7 @@ const ClipSection = () => {
       <div className=" bg-secondaryMat text-white text-center p-12 clip-path-section h-[200px]">
         <style jsx>{`
           .clip-path-section {
-            clip-path: polygon(49% 39%, 100% 0, 100% 100%, 0 100%, 0 0);
+            clip-path: polygon(51% 39%, 100% 0, 100% 100%, 0 100%, 0 0);
           }
         `}</style>
       </div>

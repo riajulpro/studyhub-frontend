@@ -4,17 +4,16 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 // import SubscribeInput from "../shared/SubscribeInput";
 import { bgImageStyle, renderNewLine } from "./homeUtils";
+import Image from "next/image";
 
 const slides = [
   {
-    image: "/images/hero1.png",
+    image: "/images/Accredited-Driver-Training.webp",
     head: `Don’t miss\nThe Opportunity`,
-    // desc: `Save up to 50% on your first order`,
   },
   {
-    image: "/images/hero2.png",
+    image: "/images/driving-school-exam.jpg",
     head: `Get Daily\nPractise Modules`,
-    // desc: `Get super fast delivery every time`,
   },
 ];
 const Banner = () => {
@@ -46,21 +45,21 @@ const Banner = () => {
             className={`w-full h-full absolute top-0 left-0 z-30 bg-secondaryMat flex flex-col justify-center pr-[30px] pl-[30px] lg:pl-[50px] ${
               i === selected ? "opacity-1" : "opacity-0"
             } duration-[0.3s]`}
-            style={{
-              backgroundImage: `url(${image})`,
-              ...bgImageStyle,
-              transition: "0.5s",
-            }}
           >
-            <div
-              className="flex flex-col gap-[25px] text-white"
-              key={i + "slide"}
-            >
-              <h1 className="text-[25px] sm:text-[40px] md:text-[60px] font-[700] md:leading-[72px]">
-                {renderNewLine(head)}
-              </h1>
-              <div className="w-[300px]">
-                <button className="btn-style bg-coralMat">Get Started</button>
+            <div className="flex items-center justify-between">
+              <div
+                className="flex flex-col gap-[25px] text-white"
+                key={i + "slide"}
+              >
+                <h1 className="text-[25px] sm:text-[40px] md:text-[60px] font-[700] md:leading-[72px]">
+                  {renderNewLine(head)}
+                </h1>
+                <div className="w-[300px]">
+                  <button className="btn-style bg-coralMat">Get Started</button>
+                </div>
+              </div>
+              <div className="">
+                <Image src={image} width={500} height={500} alt="" className="rounded-xl  md:w-[500px] h-[300px]" />
               </div>
             </div>
           </div>
