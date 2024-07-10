@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Link from "next/link";
+import { toast } from "sonner";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -36,11 +38,26 @@ const validationSchema = Yup.object({
     .required("Confirm password is required"),
 });
 
-const handleSubmit = (values: TFormValues) => {
-  console.log(values);
-};
-
 const Page = () => {
+  const [register] = useRegisterMutation();
+
+  const handleSubmit = async (values: TFormValues) => {
+    const toastId = toast.loading("Please wait...");
+    try {
+      const { data } = await register(values);
+      if (!data) {
+        return toast.error("An unexpected error occured");
+      }
+      if (!data.success) {
+        return toast.error(data.message || "Something went wrong");
+      }
+      toast.success("Register successfull", { description: "Please login !" });
+    } catch (error) {
+      toast.error("Something went wrong while submitting this form");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
   return (
     <div className="flex flex-col min-h-dvh">
       <main className="flex-1 flex items-center justify-center px-4 md:px-6">
