@@ -15,6 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { LeftSidebar } from "./LeftSidebar";
 
 const Header = () => {
   const [scroll, setScroll] = useState(false);
@@ -49,7 +50,7 @@ const Header = () => {
     >
       <div className="layout_container flex justify-between gap-4 items-center">
         <div className="flex items-center gap-2">
-          {/* <LeftSidebar /> */}
+          <LeftSidebar />
           <span className="text-lg font-bold">StudyHub</span>
         </div>
         <nav className="hidden lg:flex gap-5 items-center">
