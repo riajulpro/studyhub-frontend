@@ -43,7 +43,7 @@ const Banner = () => {
         {slides.map(({ head, image }, i) => (
           <div
             key={i + "slide"}
-            className={`w-full h-full absolute top-0 left-0 z-30 bg-green-300 flex flex-col justify-center pr-[30px] pl-[30px] lg:pl-[50px] ${
+            className={`w-full h-full absolute top-0 left-0 z-30 bg-secondaryMat flex flex-col justify-center pr-[30px] pl-[30px] lg:pl-[50px] ${
               i === selected ? "opacity-1" : "opacity-0"
             } duration-[0.3s]`}
             style={{
@@ -52,13 +52,16 @@ const Banner = () => {
               transition: "0.5s",
             }}
           >
-            <div className="flex flex-col gap-[25px]" key={i + "slide"}>
-              <h1 className="text-[25px] sm:text-[40px] md:text-[60px] font-[700] md:leading-[72px] text-primaryTxt">
+            <div
+              className="flex flex-col gap-[25px] text-white"
+              key={i + "slide"}
+            >
+              <h1 className="text-[25px] sm:text-[40px] md:text-[60px] font-[700] md:leading-[72px]">
                 {renderNewLine(head)}
               </h1>
-              {/* <p className="text-[18px] md:text-[25px] font-[500]">{desc}</p> */}
-
-              {/* <SubscribeInput /> */}
+              <div className="w-[300px]">
+                <button className="btn-style bg-coralMat">Get Started</button>
+              </div>
             </div>
           </div>
         ))}

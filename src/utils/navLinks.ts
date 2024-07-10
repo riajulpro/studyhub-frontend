@@ -4,8 +4,8 @@ export const navLinks = [
     route: "Home",
   },
   {
-    path: "/products",
-    route: "Products",
+    path: "/moduels",
+    route: "Modules",
   },
   {
     path: "/about-us",

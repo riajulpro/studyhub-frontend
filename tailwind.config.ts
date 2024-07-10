@@ -21,7 +21,9 @@ const config = {
       colors: {
         // ---->
         primaryTxt: "#253D4E",
-        primaryMat: "#0f172a",
+        primaryMat: "#1D3557",
+        secondaryMat: "#2A9D8F",
+        coralMat: "#E76F51",
         borderColor: "#e4e4ec",
         borderDark: "#9c9cad",
         // ---->

@@ -12,7 +12,7 @@ const Header = () => {
   const token = "yes"
 
   return (
-    <header className="py-5 lg:py-7 border-b sticky top-0 z-50 bg-white ">
+    <header className="py-5 lg:py-7 sticky top-0 z-50 bg-white ">
       <div className="layout_container  flex justify-between gap-4 items-center">
         <div className="flex items-center gap-2">
           {/* <LeftSidebar /> */}
@@ -23,8 +23,8 @@ const Header = () => {
             <Link
               key={nav.path}
               href={nav.path}
-              className={`text-slate-700 hover:text-green-500 ${
-                location === nav.path && "font-extrabold text-green-600"
+              className={`text-slate-700 hover:text-coralMat btn-style ${
+                location === nav.path && "font-extrabold text-coralMat"
               }`}
             >
               {nav.route}
@@ -33,9 +33,9 @@ const Header = () => {
         </nav>
         <div className="flex gap-3 items-center">
           {token ? (
-            <div className="text-slate-700 hover:text-green-500">Log Out</div>
+            <div className="text-slate-700 hover:text-green-500 btn-style">Log Out</div>
           ) : (
-            <Link href="/login" className="text-slate-700 hover:text-green-500">
+            <Link href="/login" className="text-slate-700 hover:text-green-500 btn-style">
               Login
             </Link>
           )}

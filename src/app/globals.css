@@ -69,6 +69,10 @@
   .layout_container {
     @apply max-w-[1586px] mx-auto px-[10px] sm:px-[20px] md:px-[80px];
   }
+
+  .btn-style {
+    @apply px-[20px] py-[12px] shadow-md hover:shadow-xl rounded-lg 
+  }
 }
 
 @layer base {
