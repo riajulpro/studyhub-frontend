@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // import SubscribeInput from "../shared/SubscribeInput";
 import { bgImageStyle, renderNewLine } from "./homeUtils";
 import Image from "next/image";
+import Link from "next/link";
 
 const slides = [
   {
@@ -55,7 +56,7 @@ const Banner = () => {
                   {renderNewLine(head)}
                 </h1>
                 <div className="w-[300px]">
-                  <button className="btn-style bg-coralMat">Get Started</button>
+                  <Link href="/modules" className="btn-style bg-coralMat">Get Started</Link>
                 </div>
               </div>
               <div className="">
