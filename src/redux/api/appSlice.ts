@@ -6,7 +6,7 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import { setUser } from "../features/auth/auth.slice";
+import { logout, setUser } from "../features/auth/auth.slice";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
 
@@ -42,15 +42,15 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       });
 
       const data = await res.json();
-      const token = data?.data?.accessToken || "";
+      const token = data?.accessToken || "";
 
       if (token) {
-        // const user = (api.getState() as RootState).auth.user;
-        // api.dispatch(setUser({ user, token: token }));
+        api.dispatch(setUser(data?.data));
         result = await baseQuery(args, api, extraOptions);
+        Cookies.set("accessToken", token);
       }
     } catch (error) {
-      api.dispatch(setUser({ token: null, user: null }));
+      api.dispatch(logout(undefined));
     }
   }
   return result;

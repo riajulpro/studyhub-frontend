@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import * as Yup from "yup";
 
@@ -40,6 +41,7 @@ const validationSchema = Yup.object({
 
 const Page = () => {
   const [register] = useRegisterMutation();
+  const router = useRouter();
 
   const handleSubmit = async (values: TFormValues) => {
     const toastId = toast.loading("Please wait...");
@@ -51,6 +53,7 @@ const Page = () => {
       if (!data.success) {
         return toast.error(data.message || "Something went wrong");
       }
+      router.push("/login");
       toast.success("Register successfull", { description: "Please login !" });
     } catch (error) {
       toast.error("Something went wrong while submitting this form");

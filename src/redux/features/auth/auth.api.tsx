@@ -1,4 +1,5 @@
 import { api } from "@/redux/api/appSlice";
+import { IUser } from "@/types/user";
 
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,6 +12,25 @@ const userApi = api.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+    login: builder.mutation({
+      query: (payload: { email: string; password: string }) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["user"],
+    }),
+    getAuthor: builder.query<{ data: IUser }, string>({
+      query: (token) => {
+        return {
+          url: `/auth/auth-state`,
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
   }),
 });
-export const { useRegisterMutation } = userApi;
+export const { useRegisterMutation, useLoginMutation,useGetAuthorQuery } = userApi;

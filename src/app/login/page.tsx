@@ -2,11 +2,17 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import { setUser } from "@/redux/features/auth/auth.slice";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import * as Yup from "yup";
+
 const initialValues = { email: "", password: "" };
 type TFormValues = typeof initialValues;
 const validationSchema = Yup.object({
@@ -16,12 +22,31 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Password is required"),
 });
 
-const page = () => {
+const Login = () => {
+  const [login] = useLoginMutation();
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const handleSubmit = async (values: TFormValues) => {
     const toastId = toast.loading("Please wait...");
     try {
-      console.log(values);
-      toast.success(`Welcome back. ${"Jonny"}.`);
+      const { data } = await login(values);
+      if (!data) {
+        return toast.error("An unexpected error occured");
+      }
+      if (!data.success) {
+        return toast.error(data.message || "Something went wrong");
+      }
+
+      const token = data.accessToken || "";
+      const refreshToken = data.refreshToken || "";
+      const user = data.data;
+
+      Cookies.set("refreshToken", refreshToken);
+      Cookies.set("accessToken", token);
+      dispatch(setUser(user));
+      router.push("/");
+      toast.success("Register successfull", { description: "Please login !" });
     } catch (error) {
       toast.error("Something went wrong while submitting this form");
     } finally {
@@ -116,4 +141,4 @@ const page = () => {
     </div>
   );
 };
-export default page;
+export default Login;

@@ -1,34 +1,31 @@
-// "use client";
-// import Loader from "@/components/shared/Loader";
-// import { useGetAuthorQuery } from "@/redux/features/auth/auth.api";
-// import { initialState, setUser } from "@/redux/features/user/userSlice";
-// import Cookies from "js-cookie";
-// import React from "react";
-// import { useDispatch } from "react-redux";
-// const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-//   const token = Cookies.get("accessToken");
+"use client";
+import { useGetAuthorQuery } from "@/redux/features/auth/auth.api";
+import { setUser } from "@/redux/features/auth/auth.slice";
+import Cookies from "js-cookie";
+import React from "react";
+import { useDispatch } from "react-redux";
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const token = Cookies.get("accessToken");
 
-//   const { data, isSuccess, isError, isLoading } = useGetAuthorQuery(
-//     token || ""
-//   );
+  const { data, isSuccess, isError, isLoading } = useGetAuthorQuery(
+    token || ""
+  );
 
-//   // console.log("aauthtt dataa", data);
+  const dispatch = useDispatch();
 
-//   const dispatch = useDispatch();
+  // if (isLoading) {
+  //   return (
+  //     <div className="w-screen h-screen center">
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
 
-//   // if (isLoading) {
-//   //   return (
-//   //     <div className="w-screen h-screen center">
-//   //       <Loader />
-//   //     </div>
-//   //   );
-//   // }
+  if (isSuccess) {
+    dispatch(setUser(data?.data || null));
+  }
 
-//   if (isSuccess) {
-//     dispatch(setUser(data?.data || initialState));
-//   }
+  return <>{children}</>;
+};
 
-//   return <>{children}</>;
-// };
-
-// export default AuthProvider;
+export default AuthProvider;
