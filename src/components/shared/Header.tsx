@@ -1,15 +1,29 @@
 "use client";
 
+import { logout } from "@/redux/features/auth/auth.slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { navLinks, profileNavlinks } from "@/utils/navLinks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/redux/hook";
-import { navLinks } from "@/utils/navLinks";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 const Header = () => {
   const location = usePathname();
-  // const { user, token } = useAppSelector((state) => state.auth);
+  const { user } = useAppSelector((state) => state.auth);
 
-  const token = "yes"
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout(undefined));
+  };
 
   return (
     <header className="py-5 lg:py-7 border-b sticky top-0 z-50 bg-white ">
@@ -32,8 +46,68 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex gap-3 items-center">
-          {token ? (
-            <div className="text-slate-700 hover:text-green-500">Log Out</div>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="rounded-full h-[35px] w-[35px] p-[21px]"
+                >
+                  <Avatar className="h-[35px] w-[35px]">
+                    <AvatarImage src={user.picture || "/svg/userIcon.svg"} />
+                    <AvatarFallback>image</AvatarFallback>
+                  </Avatar>
+                  <span className="sr-only">Toggle user menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <div className="flex items-center gap-2 p-2">
+                  <Avatar className="h-[35px] w-[35px]">
+                    <AvatarImage src={user.picture || "/svg/userIcon.svg"} />
+                    <AvatarFallback>image</AvatarFallback>
+                  </Avatar>
+                  <div className="grid gap-0.5 leading-none">
+                    <div className="font-semibold">
+                      {user.firstName} {user.lastName}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {user.email}
+                    </div>
+                  </div>
+                </div>
+                <DropdownMenuSeparator />
+
+                {profileNavlinks.map(({ lebel, path, Icon }, i) => (
+                  <>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      key={i + "links"}
+                    >
+                      <Link
+                        href={path}
+                        className="flex items-center gap-2 pl-[16px]"
+                        prefetch={false}
+                      >
+                        <span className="flex items-center justify-start gap-[8px]">
+                          <Icon className="text-[16px]" />
+                          <span>{lebel}</span>
+                        </span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                ))}
+
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  <button className="flex items-center gap-2 pl-[16px]">
+                    <span>Logout</span>
+                  </button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <Link href="/login" className="text-slate-700 hover:text-green-500">
               Login

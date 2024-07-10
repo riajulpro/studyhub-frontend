@@ -3,6 +3,6 @@ export interface IUser {
   lastName: string;
   email: string;
   isVarified: boolean;
-  picture?: string;
+  picture: string;
   progress: { [key: string]: boolean };
 }

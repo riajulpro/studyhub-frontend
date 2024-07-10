@@ -1,6 +1,6 @@
 import { IUser } from "@/types/user";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
+import Cookies from "js-cookie";
 type TAuthState = {
   user: IUser | null;
 };
@@ -16,6 +16,8 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logout(state, action) {
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
       return { user: null };
     },
 
