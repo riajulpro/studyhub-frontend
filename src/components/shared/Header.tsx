@@ -42,7 +42,7 @@ const Header = () => {
             <Link
               key={nav.path}
               href={nav.path}
-              className={`text-slate-700 hover:text-coralMat btn-style ${
+              className={`text-primary hover:text-coralMat btn-style ${
                 location === nav.path && "font-extrabold text-coralMat"
               }`}
             >
@@ -52,13 +52,13 @@ const Header = () => {
         </nav>
         <div className="flex gap-3 items-center">
           {token ? (
-            <div className="text-slate-700 hover:text-green-500 btn-style">
+            <div className="text-slate-700 hover:text-coralMat btn-style">
               Log Out
             </div>
           ) : (
             <Link
               href="/login"
-              className="text-slate-700 hover:text-green-500 btn-style"
+              className="text-slate-700 hover:text-coralMat btn-style"
             >
               Login
             </Link>

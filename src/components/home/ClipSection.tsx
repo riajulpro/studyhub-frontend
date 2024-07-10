@@ -3,7 +3,7 @@
 const ClipSection = () => {
   return (
     <section className="relative border-b-2 border-white">
-      <div className="absolute flex flex-col left-[45%] top-[20px] z-20 items-center justify-center">
+      <div className="absolute flex flex-col left-1/2 -translate-x-1/2 top-[20px] z-20 items-center justify-center">
         <h2 className="text-2xl font-bold text-coralMat">Join Us Now</h2>
         <div className="">
           <button className="btn-style bg-coralMat font-medium text-white">Get Started</button>
