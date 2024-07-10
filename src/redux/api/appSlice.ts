@@ -7,14 +7,13 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 import { setUser } from "../features/auth/auth.slice";
-import { RootState } from "../store/store";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: url,
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    const token = Cookies.get("accessToken");
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -46,8 +45,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       const token = data?.data?.accessToken || "";
 
       if (token) {
-        const user = (api.getState() as RootState).auth.user;
-        api.dispatch(setUser({ user, token: token }));
+        // const user = (api.getState() as RootState).auth.user;
+        // api.dispatch(setUser({ user, token: token }));
         result = await baseQuery(args, api, extraOptions);
       }
     } catch (error) {
@@ -73,15 +72,6 @@ export const api = createApi({
   // }),
   // tagTypes: ["user", "Product", "Category", "tag", "Sell", "Brand", "Tag"],
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: [
-    "user",
-    "Product",
-    "Category",
-    "tag",
-    "Sell",
-    "Brand",
-    "Tag",
-    "customer",
-  ],
+  tagTypes: ["user"],
   endpoints: () => ({}),
 });

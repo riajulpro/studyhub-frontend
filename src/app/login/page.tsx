@@ -96,7 +96,7 @@ const page = () => {
             <p className="text-start text-sm text-muted-foreground">
               Don&apos;t have an account?{" "}
               <Link
-                href="#"
+                href="/register"
                 className="font-medium underline underline-offset-4 hover:text-primaryTxt"
                 prefetch={false}
               >

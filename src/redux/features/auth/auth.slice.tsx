@@ -1,8 +1,7 @@
-import { TCustomer } from "@/types/customer";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type TAuthState = {
-  user: TCustomer | null;
+  user: {} | null;
   token: string | null;
 };
 // Define initial state
@@ -16,7 +15,7 @@ const userSlice = createSlice({
   reducers: {
     setUser(
       state,
-      action: PayloadAction<{ user: TCustomer | null; token: string | null }>
+      action: PayloadAction<{ user:{} | null; token: string | null }>
     ) {
       state.user = action.payload.user;
       state.token = action.payload.token;
