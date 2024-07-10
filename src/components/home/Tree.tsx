@@ -13,7 +13,7 @@ const stepsData = [
 const Tree = () => {
   return (
     <div className="max-w-2xl mx-auto py-[40px]">
-      <h5 className="font-semibold text-[34px] leading-[150%] text-center underline text-primaryTxt">Our Goal</h5>
+      <h5 className="font-semibold text-[34px] leading-[150%] text-center underline text-coralMat">Plan to Grow</h5>
       {stepsData.map((step) => (
         <TreeNode
           key={step.number}
