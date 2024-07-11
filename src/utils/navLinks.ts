@@ -8,7 +8,7 @@ export const navLinks = [
     route: "Home",
   },
   {
-    path: "/moduels",
+    path: "/modules",
     route: "Modules",
   },
   {

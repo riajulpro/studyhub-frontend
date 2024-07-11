@@ -1,11 +1,7 @@
-import React from 'react';
+import ModuleView from "@/views/ModulesView";
 
 const page = () => {
-    return (
-        <div className='h-screen'>
-            Module page
-        </div>
-    );
+  return <ModuleView />;
 };
 
 export default page;
