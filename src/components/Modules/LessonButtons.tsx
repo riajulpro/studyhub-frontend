@@ -21,11 +21,24 @@ const LessonButtons: React.FC<IPorps> = ({ lessons, onClick }) => {
   const { data: lessonData = { data: [] } } =
     useGetUserLessonProgressQuery(undefined);
 
-  const isLock = (_id: string) => {
-    return !lessonData?.data.length || !lessonData?.data.includes(_id as never);
-  };
   const isComplete = (_id: string) => {
     return lessonData.data.includes(_id as never);
+  };
+
+  const isLock = (_id: string, index: number) => {
+    const prevIndex = index ? index - 1 : 0;
+
+    const prevLesson = lessons[prevIndex];
+    const cur = lessons[index];
+
+    const boolean = true;
+
+    // go ahead if the previous lesson is complete =>
+    if (isComplete(prevLesson._id)) {
+      return false;
+    }
+
+    return !lessonData?.data.length || !lessonData?.data.includes(_id as never);
   };
 
   return (
@@ -38,9 +51,9 @@ const LessonButtons: React.FC<IPorps> = ({ lessons, onClick }) => {
             onClick({ questions, isComplete: isComplete(_id) });
           }}
           className="w-full p-[10px] border-b-[1px] border-borderColor text-start hover:bg-borderColor/20 flex items-center justify-start gap-[10px]"
-          disabled={i !== 0 && isLock(_id)}
+          disabled={i !== 0 && isLock(_id, i)}
         >
-          {i !== 0 && isLock(_id) ? (
+          {i !== 0 && isLock(_id, i) ? (
             <Lock className="w-[20px]" />
           ) : isComplete(_id) ? (
             <CircleCheck className="w-[20px]" />

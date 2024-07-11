@@ -71,7 +71,7 @@
   }
 
   .btn-style {
-    @apply px-[20px] py-[12px] shadow-md hover:shadow-xl rounded-lg 
+    @apply px-[20px] py-[12px] shadow-md hover:shadow-xl rounded-lg;
   }
 }
 
@@ -82,4 +82,17 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+.smoothBar::-webkit-scrollbar {
+  width: 5px;
+  opacity: 1;
+}
+
+.smoothBar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.smoothBar:hover::-webkit-scrollbar-thumb {
+  background-color: #c2c2c2;
 }

@@ -6,6 +6,7 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
+import answerSlice from "../features/answer/answer.slice";
 import { logout, setUser } from "../features/auth/auth.slice";
 
 const url = process.env.NEXT_PUBLIC_API_URL;

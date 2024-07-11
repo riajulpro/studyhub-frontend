@@ -8,9 +8,11 @@ import {
 } from "@/components/ui/accordion";
 import { useGetAllModulesQuery } from "@/redux/features/module/module.api";
 import { IQuestion } from "@/types/module";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 const ModuleView = () => {
   const { data, isLoading } = useGetAllModulesQuery(undefined);
+  const router = useRouter();
 
   const [isLessonComplete, setIsLessonComplete] = useState<boolean>(false);
 
@@ -23,13 +25,15 @@ const ModuleView = () => {
   }
 
   return (
-    <div className="flex h-[80vh]  layout_container overflow-auto p-[20px]">
-      <div className="shadow-md rounded-[15px] w-full flex">
-        <div className="w-1/4 p-4 border-r border-border">
+    <div className="flex h-[100vh]  layout_container p-[20px]">
+      <div className="shadow-md rounded-[15px] w-full flex py-[20px]">
+        <div className="w-1/4 p-4 border-r border-border h-full overflow-auto smoothBar">
           <Accordion type="single" collapsible>
             {data?.data?.map(({ name, _id, lessons }, i) => (
               <AccordionItem value={`module-${_id}`} key={i + "module"}>
-                <AccordionTrigger>
+                <AccordionTrigger
+                  onClick={() => router.push(`/modules?moduleid=${_id || ""}`)}
+                >
                   <h2 className="text-lg font-semibold">Module name: {name}</h2>
                 </AccordionTrigger>
                 <LessonButtons
@@ -43,20 +47,11 @@ const ModuleView = () => {
             ))}
           </Accordion>
         </div>
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 h-full overflow-auto smoothBar">
           <LessonQuestions
             isLessonComplete={isLessonComplete}
             questions={questions}
           />
-
-          <div className="flex justify-between">
-            <button className="w-32 h-12 border-2 border-white rounded-lg">
-              Previous
-            </button>
-            <button className="w-32 h-12 border-2 border-white rounded-lg">
-              Next
-            </button>
-          </div>
         </div>
       </div>
     </div>

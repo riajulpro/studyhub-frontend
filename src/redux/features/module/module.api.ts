@@ -25,10 +25,19 @@ const moduleApi = api.injectEndpoints({
       }),
       providesTags: ["module"],
     }),
+    updateLesson: builder.mutation({
+      query: (payload: { moduleId: string; lessonId: string }) => ({
+        url: "/progress/update/lesson",
+        method: "PATCH",
+        body: payload,
+      }),
+      invalidatesTags: ["module"],
+    }),
   }),
 });
 export const {
   useGetAllModulesQuery,
   useGetUserModuleProgressQuery,
   useGetUserLessonProgressQuery,
+  useUpdateLessonMutation,
 } = moduleApi;

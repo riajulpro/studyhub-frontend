@@ -1,7 +1,7 @@
 import { IQuestion } from "@/types/module";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IAnswer extends IQuestion {
+export interface IAnswer extends IQuestion {
   answer: string;
 }
 
