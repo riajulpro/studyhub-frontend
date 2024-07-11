@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { useGetAllModulesQuery } from "@/redux/features/module/module.api";
 import { IQuestion } from "@/types/module";
+import Loader from "@/utils/Loader";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 const ModuleView = () => {
@@ -21,7 +22,7 @@ const ModuleView = () => {
   );
 
   if (isLoading) {
-    return <>loasind</>;
+    return <Loader />;
   }
 
   return (

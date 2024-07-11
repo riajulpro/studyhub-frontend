@@ -13,14 +13,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const dispatch = useDispatch();
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="w-screen h-screen center">
-  //       <Loader />
-  //     </div>
-  //   );
-  // }
-
   if (isSuccess) {
     dispatch(setUser(data?.data || null));
   }

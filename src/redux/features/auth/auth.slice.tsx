@@ -3,10 +3,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 type TAuthState = {
   user: IUser | null;
+  loading: boolean;
 };
 // Define initial state
 const initialState: TAuthState = {
   user: null,
+  loading: true,
 };
 const userSlice = createSlice({
   name: "user",
@@ -14,11 +16,12 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action: PayloadAction<IUser>) {
       state.user = action.payload;
+      state.loading = false;
     },
     logout(state, action) {
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
-      return { user: null };
+      return { user: null, loading: false };
     },
 
     // Add more reducers as needed

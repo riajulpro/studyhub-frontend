@@ -26,6 +26,7 @@ const Login = () => {
   const [login] = useLoginMutation();
   const router = useRouter();
   const dispatch = useDispatch();
+  const redirect = Cookies.get("redirect") || "/";
 
   const handleSubmit = async (values: TFormValues) => {
     const toastId = toast.loading("Please wait...");
@@ -45,7 +46,7 @@ const Login = () => {
       Cookies.set("refreshToken", refreshToken);
       Cookies.set("accessToken", token);
       dispatch(setUser(user));
-      router.push("/");
+      router.push(redirect);
       toast.success("Register successfull", { description: "Please login !" });
     } catch (error) {
       toast.error("Something went wrong while submitting this form");
